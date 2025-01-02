@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { db } from '@/lib/firebase';
 import { collection, query as firestoreQuery, orderBy, getDocs, QuerySnapshot, limit } from 'firebase/firestore';
@@ -10,9 +10,9 @@ import { useRouter } from 'next/navigation';
 import { SearchResult } from '@/types';
 import Link from 'next/link';
 
-export default function Movies() {
-    const router = useRouter();
+const MoviesContent = () => {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const searchQuery = searchParams.get('search') || '';
     const latestMovies = searchParams.get('latest') === 'true';
     const [movies, setMovies] = useState<SearchResult[]>([]);
@@ -141,7 +141,7 @@ export default function Movies() {
     if (loading) {
         return <div className="text-center py-4">Loading...</div>;
     }
-
+    
     return (
         <div className="max-w-4xl mx-auto p-4">
             <div className="my-4 mb-6">
@@ -221,4 +221,12 @@ export default function Movies() {
             )}
         </div>
     );
-}
+  };
+
+  export default function Movies() {
+    return (
+      <Suspense fallback={<div className="text-center py-4">Loading...</div>}>
+        <MoviesContent />
+      </Suspense>
+    );
+  }
