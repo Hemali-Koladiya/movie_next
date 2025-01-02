@@ -155,7 +155,6 @@ const DashboardContent = () => {
   }
 
   return (
-    <AdminLayout>
       <div className="p-6">
         <h1 className="text-[22px] font-bold mb-6 bg-[#D9D9D9] max-w-max px-14 py-1.5 rounded-[18px]">Dashboard</h1>
         <div className='flex items-center mb-8 gap-4'>
@@ -388,7 +387,6 @@ const DashboardContent = () => {
           </div>
         )}
       </div>
-    </AdminLayout>
   );
 };
 
