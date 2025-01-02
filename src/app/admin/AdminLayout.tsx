@@ -2,7 +2,7 @@
 
 import { ChevronDown, Plus } from "lucide-react";
 import Link from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode, Suspense, useState } from "react";
 import logo from "../../../public/logo.png"
 import Image from "next/image";
 import Images from "../../../public/iconComponent/Image";
@@ -39,7 +39,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     };
 
     return (
-        <>
+        <Suspense>
             <div className="flex h-screen bg-white">
                 <div className="w-64 bg-[#DBDBDBDD] text-white rounded-r-3xl py-5 flex flex-col justify-between">
                     <div className="p-4">
@@ -135,7 +135,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                     <div className="p-6">{children}</div>
                 </div>
             </div>
-        </>
+        </Suspense>
     )
 }
 
