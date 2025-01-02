@@ -153,9 +153,9 @@ interface Suggestion {
 
 
 const staticTrendingSuggestions: Suggestion[] = [
-  { title: 'Trending 1' },
-  { title: 'Trending 2' },
-  { title: 'Trending 3' },
+  { title: 'Trending movie 1' },
+  { title: 'Trending movie 2' },
+  { title: 'Trending movie 3' },
 ];
 
 const Search = ({ onSearch, initialQuery = '' }: { onSearch: (query: string) => void, initialQuery?: string }) => {
