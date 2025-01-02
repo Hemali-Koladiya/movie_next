@@ -151,23 +151,23 @@ const DashboardContent = () => {
   );
 
   if (loading) {
-    return <AdminLayout><div>Loading...</div></AdminLayout>;
+    return <AdminLayout><div className='text-black '>Loading...</div></AdminLayout>;
   }
 
   return (
       <div className="p-6">
-        <h1 className="text-[22px] font-bold mb-6 bg-[#D9D9D9] max-w-max px-14 py-1.5 rounded-[18px]">Dashboard</h1>
+        <h1 className="text-black text-[22px] font-bold mb-6 bg-[#D9D9D9] max-w-max px-14 py-1.5 rounded-[18px]">Dashboard</h1>
         <div className='flex items-center mb-8 gap-4'>
           <div className='w-1/3'>
             {/* <Search onSearch={handleSearch} initialQuery={currentSearchQuery} /> */}
             <AdminSearch onSearch={handleSearch} initialQuery={currentSearchQuery} />
           </div>
           <div className='flex gap-1 items-center border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-3 rounded-[8px]'>
-            <Filter size={20} />
+            <Filter size={20} color='black' />
             <select
               value={selectedCategory}
               onChange={handleCategoryChange}
-              className='w-44 border-none outline-none'
+              className='text-black w-44 border-none outline-none'
             >
               <option value="">All Categories</option>
               <option value="Movie">Movie</option>
@@ -236,7 +236,7 @@ const DashboardContent = () => {
                 ))}
               </tbody>
             </table> */}
-            <table className="w-full border-collapse ">
+            <table className="text-black w-full border-collapse ">
               <thead className='w-full'>
                 <tr className="gap-2 flex mb-4">
                   <th className="p-2.5 bg-[#D9D9D9] rounded-[18px] min-w-[150px]">Image</th>
@@ -366,7 +366,7 @@ const DashboardContent = () => {
         )}
 
         {totalPages > 1 && (
-          <div className="flex justify-between gap-2 mt-12 px-8">
+          <div className="text-black  flex justify-between gap-2 mt-12 px-8">
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}

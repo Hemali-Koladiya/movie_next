@@ -157,12 +157,12 @@ export default function EditSearchResult({
   // };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='text-black'>Loading...</div>;
   }
 
   return (
     <AdminLayout>
-      <div className="p-8 max-w-[600px] m-auto bg-[#E0E0E0BF] rounded-3xl mt-5">
+      <div className="text-black p-8 max-w-[600px] m-auto bg-[#E0E0E0BF] rounded-3xl mt-5">
         <h1 className="font-bold mb-4 text-xl text-center">Update Media </h1>
 
         {error && (
