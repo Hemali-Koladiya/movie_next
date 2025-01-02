@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { db } from '@/lib/firebase';
 import { collection, query, orderBy, getDocs, deleteDoc, doc } from 'firebase/firestore';
@@ -10,7 +10,7 @@ import { SearchResult } from '@/types';
 import { Edit, Filter, MoreVertical, Trash } from 'lucide-react';
 import AdminSearch from '@/components/adminsearch';
 
-export default function AdminDashboard() {
+const DashboardContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -388,6 +388,17 @@ export default function AdminDashboard() {
           </div>
         )}
       </div>
+    </AdminLayout>
+  );
+};
+
+
+export default function AdminDashboard() {
+  return (
+    <AdminLayout>
+      <Suspense fallback={<div>Loading dashboard...</div>}>
+        <DashboardContent />
+      </Suspense>
     </AdminLayout>
   );
 }
