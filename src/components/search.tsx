@@ -138,8 +138,6 @@
 
 
 
-
-
 'use client';
 import { useEffect, useState } from 'react';
 import { db } from '@/lib/firebase';
@@ -454,7 +452,7 @@ useEffect(() => {
         </div>
 
         {isInputFocused && (
-          <ul className="absolute w-full mt-2 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto z-10 text-start">
+          <ul className="absolute w-full mt-2 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto z-[99] text-start">
             {[...staticTrendingSuggestions, ...dynamicSuggestions].map((suggestion, index) => (
               <li
                 key={index}

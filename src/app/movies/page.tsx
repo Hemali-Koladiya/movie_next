@@ -9,6 +9,9 @@ import Search from '@/components/search';
 import { useRouter } from 'next/navigation';
 import { SearchResult } from '@/types';
 import Link from 'next/link';
+import logo from "../../../public/logo.png";
+import { LinkIcon } from 'lucide-react';
+import background from "../../../public/moviebackground.png";
 
 const MoviesContent = () => {
     const searchParams = useSearchParams();
@@ -40,7 +43,7 @@ const MoviesContent = () => {
         try {
             const moviesRef = collection(db, 'searchResults');
             const q = firestoreQuery(moviesRef, orderBy('created_at', 'desc'));
-    
+
             const snapshot: QuerySnapshot = await getDocs(q);
             const data = snapshot.docs.map((doc) => {
                 const docData = doc.data();
@@ -53,14 +56,14 @@ const MoviesContent = () => {
                     category: docData.category || '',
                 };
             });
-    
+
             const lowercaseQuery = query.toLowerCase();
             const filteredMovies = data.filter(
                 (movie) =>
                     movie.title.toLowerCase().includes(lowercaseQuery) ||
                     movie.description.toLowerCase().includes(lowercaseQuery)
             );
-    
+
             setMovies(filteredMovies);
         } catch (error) {
             console.error('Error fetching movies:', error);
@@ -69,7 +72,7 @@ const MoviesContent = () => {
             setLoading(false);
         }
     };
-    
+
 
     // const fetchMovies = async (query: string) => {
     //     setLoading(true);
@@ -141,92 +144,112 @@ const MoviesContent = () => {
     if (loading) {
         return <div className="text-center py-4">Loading...</div>;
     }
-    
+
     return (
-        <div className="max-w-4xl mx-auto p-4">
-            <div className="my-4 mb-6">
-                <Search onSearch={handleSearch} initialQuery={currentSearchQuery} />
-            </div>
 
-            {movies.length === 0 && !loading && (
-                <div className="text-center text-gray-500">No movies found</div>
-            )}
+        <>
+            <div className='fixed inset-0 z-0'
+                style={{backgroundImage:
+                    `url(${background.src})`,
+                    backgroundPosition: "center"
+                    }}>
 
-            {movies.length > 0 && (
-                <div className="space-y-4">
-                    {(latestMovies ? movies : currentMovies).map((movie) => (
-                        <div key={movie.id} className="flex gap-4 p-2 pe-5 border rounded-lg">
-                            <div className='lg:w-32 lg:h-32 sm:w-28 sm:h-28 w-24 h-24 object-cover rounded'>
-                                <Image
-                                    src={movie.imageBase64 || '/placeholder-image.png'}
-                                    alt={movie.title}
-                                    className="lg:w-32 lg:h-32 sm:w-28 sm:h-28 w-24 h-24 object-cover rounded"
-                                    width={100}
-                                    height={100}
-                                />
-                            </div>
+            </div >
+            <div className='min-h-screen' style={{
+                backgroundColor: "black",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}>
+                <div className="py-4 mb-6 flex md:flex-row flex-col md:items-center lg:px-20 px-4 lg:gap-[4.5rem] md:gap-10 gap-3 z-10 relative">
+                    <div className='justify-self-start lg:w-40 w-36'>
+                        <Image src={logo} alt='logo' />
+                    </div>
+                    <div className='lg:w-2/3 w-full mt-3 md:mt-0'>
+                        <Search onSearch={handleSearch} initialQuery={currentSearchQuery} />
+                    </div>
+                </div>
+                <div className="max-w-4xl mx-auto p-4 z-[5] relative text-white">
+                    {movies.length === 0 && !loading && (
+                        <div className="text-center text-gray-500">No movies found</div>
+                    )}
 
-                            <div className='overflow-hidden flex sm:flex-row flex-col justify-between w-full'>
-                                <div className='sm:w-5/6'>
-                                    <h2 className="lg:text-xl sm:text-lg text-base font-semibold mt-4">{movie.title}</h2>
-                                    <p className="text-sm max-h-16 overflow-hidden text-ellipsis line-clamp-2">{movie.description}</p>
+                    {movies.length > 0 && (
+                        <div className="space-y-4">
+                            {(latestMovies ? movies : currentMovies).map((movie) => (
+                                <div key={movie.id} className="flex gap-4 p-2 pe-5  rounded-lg">
+                                    <div className='lg:w-32 lg:h-32 sm:w-28 sm:h-28 w-24 h-24 object-cover rounded'>
+                                        <Image
+                                            src={movie.imageBase64 || '/placeholder-image.png'}
+                                            alt={movie.title}
+                                            className="lg:w-32 lg:h-32 sm:w-28 sm:h-28 w-24 h-24 object-cover rounded"
+                                            width={100}
+                                            height={100}
+                                        />
+                                    </div>
+
+                                    <div className='overflow-hidden flex sm:flex-row flex-col justify-between w-full'>
+                                        <div className='lg:w-5/6 sm:w-4/6'>
+                                            <h2 className="lg:text-xl sm:text-lg text-base font-semibold md:mt-4">{movie.title}</h2>
+                                            <p className="text-sm max-h-16 overflow-hidden text-ellipsis lg:line-clamp-3 line-clamp-2">{movie.description}</p>
+                                        </div>
+                                        <div className='sm:self-center mt-3 sm:mt-0'>
+                                            {movie.link && (
+                                                <Link
+                                                    href={movie.link}
+                                                    className="border break-words lg:text-base text-sm py-2 px-3 bg-green-600 text-white rounded hover:bg-green-700 flex items-center gap-2 max-w-fit"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
+                                                    <span> <LinkIcon size={18} /></span> Get Link
+                                                </Link>
+                                            )}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className='sm:self-center mt-5 sm:mt-0'>
-                                    {movie.link && (
-                                        <Link
-                                            href={movie.link}
-                                            className="border break-words lg:text-base text-sm py-2 px-3 bg-green-600 text-white rounded hover:bg-green-700"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            Get Link
-                                        </Link>
-                                    )}
-                                </div>
-                            </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-            )}
+                    )}
 
-            {!latestMovies && totalPages > 1 && (
-                <div className="flex justify-end mt-6 space-x-2">
-                    <button
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        disabled={currentPage === 1}
-                        className={`px-4 py-2 border rounded ${currentPage === 1 ? 'bg-[#BABABABB] text-gray-700 cursor-not-allowed' : 'bg-[#a3a3a3]'
-                            }`}
-                    >
-                        Previous
-                    </button>
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                        <button
-                            key={page}
-                            onClick={() => handlePageChange(page)}
-                            className={`px-4 py-2 border rounded ${page === currentPage ? 'bg-[#BABABABB] text-white' : 'bg-[#a3a3a3]'
-                                }`}
-                        >
-                            {page}
-                        </button>
-                    ))}
-                    <button
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                        className={`px-4 py-2 border rounded ${currentPage === totalPages ? 'bg-[#BABABABB] text-gray-700 cursor-not-allowed' : 'bg-[#a3a3a3]'
-                            }`}
-                    >
-                        Next
-                    </button>
+                    {!latestMovies && totalPages > 1 && (
+                        <div className="flex justify-end mt-6 space-x-2">
+                            <button
+                                onClick={() => handlePageChange(currentPage - 1)}
+                                disabled={currentPage === 1}
+                                className={`px-4 py-2 border rounded ${currentPage === 1 ? 'bg-[#BABABABB] text-gray-700 cursor-not-allowed' : 'bg-[#a3a3a3]'
+                                    }`}
+                            >
+                                Previous
+                            </button>
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                                <button
+                                    key={page}
+                                    onClick={() => handlePageChange(page)}
+                                    className={`px-4 py-2 border rounded ${page === currentPage ? 'bg-[#BABABABB] text-white' : 'bg-[#a3a3a3]'
+                                        }`}
+                                >
+                                    {page}
+                                </button>
+                            ))}
+                            <button
+                                onClick={() => handlePageChange(currentPage + 1)}
+                                disabled={currentPage === totalPages}
+                                className={`px-4 py-2 border rounded ${currentPage === totalPages ? 'bg-[#BABABABB] text-gray-700 cursor-not-allowed' : 'bg-[#a3a3a3]'
+                                    }`}
+                            >
+                                Next
+                            </button>
+                        </div>
+                    )}
                 </div>
-            )}
-        </div>
+            </div>
+        </>
     );
-  };
+};
 
-  export default function Movies() {
+export default function Movies() {
     return (
-      <Suspense fallback={<div className="text-center py-4">Loading...</div>}>
-        <MoviesContent />
-      </Suspense>
+        <Suspense fallback={<div className="text-center py-4">Loading...</div>}>
+            <MoviesContent />
+        </Suspense>
     );
-  }
+}
