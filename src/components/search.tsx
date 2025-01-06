@@ -456,7 +456,7 @@ useEffect(() => {
             {[...staticTrendingSuggestions, ...dynamicSuggestions].map((suggestion, index) => (
               <li
                 key={index}
-                className={`flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-black ${selectedIndex === index ? 'bg-gray-100' : ''}`}
+                className={`flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer text-black ${selectedIndex === index ? 'bg-gray-300' : ''}`}
                 onClick={() => {
                   setQuery(suggestion.title);
                   onSearch(suggestion.title);

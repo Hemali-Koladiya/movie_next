@@ -36,11 +36,12 @@ export default function Home() {
         style={{
           backgroundImage: `linear-gradient(
         to bottom,
-rgba(38, 36, 36, 0.76),
-        #1B1919FC,
+rgba(38, 36, 36, 0.85),
+rgba(27, 25, 25, 0.85),
         #12101000,
         #121010C7
-      )`}}>
+      )`, backgroundRepeat: "no-repeat",
+      backgroundSize: "cover"}}>
 
       </div >
       <main className="h-screen flex flex-col items-center justify-center p-4"
