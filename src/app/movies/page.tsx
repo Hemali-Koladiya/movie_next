@@ -160,10 +160,10 @@ const MoviesContent = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}>
-                <div className="py-4 mb-6 flex md:flex-row flex-col md:items-center lg:px-20 px-4 lg:gap-[4.5rem] md:gap-10 gap-3 z-10 relative">
-                    <div className='justify-self-start lg:w-40 w-36'>
+                <div className="py-4 pt-12 mb-6 flex md:flex-row flex-col md:items-center lg:px-20 px-4 lg:gap-[4.5rem] md:gap-10 gap-3 z-10 relative">
+                    <Link href="/" className='justify-self-start lg:w-40 w-36'>
                         <Image src={logo} alt='logo' />
-                    </div>
+                    </Link>
                     <div className='lg:w-2/3 w-full mt-3 md:mt-0'>
                         <Search onSearch={handleSearch} initialQuery={currentSearchQuery} />
                     </div>
@@ -176,7 +176,7 @@ const MoviesContent = () => {
                     {movies.length > 0 && (
                         <div className="space-y-4">
                             {(latestMovies ? movies : currentMovies).map((movie) => (
-                                <div key={movie.id} className="flex gap-4 p-2 pe-5  rounded-lg">
+                                <div key={movie.id} className="flex gap-4 p-2 sm:pe-5  rounded-lg">
                                     <div className='lg:w-32 lg:h-32 sm:w-28 sm:h-28 w-24 h-24 object-cover rounded'>
                                         <Image
                                             src={movie.imageBase64 || '/placeholder-image.png'}
@@ -188,7 +188,7 @@ const MoviesContent = () => {
                                     </div>
 
                                     <div className='overflow-hidden flex sm:flex-row flex-col justify-between w-full'>
-                                        <div className='lg:w-5/6 sm:w-4/6'>
+                                        <div className='lg:w-9/12 sm:w-4/6'>
                                             <h2 className="lg:text-xl sm:text-lg text-base font-semibold md:mt-4">{movie.title}</h2>
                                             <p className="text-sm max-h-16 overflow-hidden text-ellipsis lg:line-clamp-3 line-clamp-2">{movie.description}</p>
                                         </div>
@@ -196,7 +196,7 @@ const MoviesContent = () => {
                                             {movie.link && (
                                                 <Link
                                                     href={movie.link}
-                                                    className="border break-words lg:text-base text-sm py-2 px-3 bg-green-600 text-white rounded hover:bg-green-700 flex items-center gap-2 max-w-fit"
+                                                    className="border break-words lg:text-base text-sm lg:py-2 sm:py-1.5 py-1 px-3 bg-green-600 text-white rounded hover:bg-green-700 flex items-center gap-2 max-w-fit"
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
