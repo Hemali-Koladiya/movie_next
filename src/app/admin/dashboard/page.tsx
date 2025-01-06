@@ -151,7 +151,7 @@ const DashboardContent = () => {
   );
 
   if (loading) {
-    return <AdminLayout><div className='text-black '>Loading...</div></AdminLayout>;
+    return <div className='text-black '>Loading...</div>;
   }
 
   return (
