@@ -41,7 +41,8 @@ rgba(27, 25, 25, 0.85),
         #12101000,
         #121010C7
       )`, backgroundRepeat: "no-repeat",
-      backgroundSize: "cover"}}>
+          backgroundSize: "cover"
+        }}>
 
       </div >
       <main className="h-screen flex flex-col items-center justify-center p-4"
@@ -51,29 +52,40 @@ rgba(27, 25, 25, 0.85),
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}>
-        <div className="w-full max-w-2xl mx-auto text-center z-10">
-          <Image
-            src={logo}
-            alt="Logo"
-            width={300}
-            height={100}
-            className="mx-auto mb-8"
-          />
+        <div className="w-full max-w-5xl mx-auto text-center z-10">
+          <div className=''>
+            <Image
+              src={logo}
+              alt="Logo"
+              // width={300}
+              // height={100}
+              className="mx-auto object-cover xl:w-[300px] lg:w-[250px] sm:w-[200px] w-[150px]"
+            />
+          </div>
 
-          <div onKeyPress={handleKeyPress}>
+          <div className='my-5'>
+            <p className='text-white xl:text-[40px] lg:text-[32px] md:text-[28px] text-[18px] font-bold'>
+              Unlimited movies, Unlimited Shorts
+            </p>
+            <p className='text-white xl:text-[32px] lg:text-[25px] md:text-[20px] text-[14px] font-semibold	'>
+              Watch Anywhere, Anytime
+            </p>
+          </div>
+
+          <div onKeyPress={handleKeyPress} className='max-w-2xl mx-auto'>
             <Search onSearch={handleSearch} initialQuery={currentSearchQuery} />
           </div>
 
           <div className="flex gap-4 mt-4 justify-center">
             <button
               onClick={performSearch}
-              className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+              className="lg:px-6 lg:py-2 md:px-5 px-4 py-1.5 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors xl:text-lg md:text-base text-sm"
             >
               Search
             </button>
             <button
               onClick={() => router.push('/movies?latest=true')}
-              className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+              className="lg:px-6 lg:py-2 md:px-5 px-4 py-1.5 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors xl:text-lg md:text-base text-sm"
             >
               Latest Videos
             </button>
