@@ -149,10 +149,11 @@ const MoviesContent = () => {
 
         <>
             <div className='fixed inset-0 z-0'
-                style={{backgroundImage:
-                    `url(${background.src})`,
+                style={{
+                    backgroundImage:
+                        `url(${background.src})`,
                     backgroundPosition: "center"
-                    }}>
+                }}>
 
             </div >
             <div className='min-h-screen' style={{
@@ -160,11 +161,14 @@ const MoviesContent = () => {
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}>
-                <div className="py-4 pt-12 mb-6 flex md:flex-row flex-col md:items-center lg:px-20 px-4 lg:gap-[4.5rem] md:gap-10 gap-3 z-10 relative">
-                    <Link href="/" className='justify-self-start lg:w-40 w-36'>
-                        <Image src={logo} alt='logo' />
-                    </Link>
-                    <div className='lg:w-2/3 w-full mt-3 md:mt-0'>
+
+                <div className='py-5 pt-8 relative lg:px-20 px-4'>
+                    <div className="z-10 lg:absolute flex justify-center top-9 2xl:left-16 left-10">
+                        <Link href="/" className='lg:w-40 w-36'>
+                            <Image src={logo} alt='logo' className='lg:w-40 w-36' />
+                        </Link>
+                    </div>
+                    <div className='lg:w-2/3 w-full mt-5 lg:mt-0 xl:mx-auto ms-auto'>
                         <Search onSearch={handleSearch} initialQuery={currentSearchQuery} />
                     </div>
                 </div>
@@ -176,12 +180,12 @@ const MoviesContent = () => {
                     {movies.length > 0 && (
                         <div className="space-y-4">
                             {(latestMovies ? movies : currentMovies).map((movie) => (
-                                <div key={movie.id} className="flex gap-4 p-2 sm:pe-5  rounded-lg">
-                                    <div className='lg:w-32 lg:h-32 sm:w-28 sm:h-28 w-24 h-24 object-cover rounded'>
+                                <div key={movie.id} className="flex gap-4 p-2 sm:pe-5 border rounded-lg">
+                                    <div className='lg:w-32 lg:h-32 w-28 h-28 object-cover rounded'>
                                         <Image
                                             src={movie.imageBase64 || '/placeholder-image.png'}
                                             alt={movie.title}
-                                            className="lg:w-32 lg:h-32 sm:w-28 sm:h-28 w-24 h-24 object-cover rounded"
+                                            className="lg:w-32 lg:h-32 w-28 h-28  object-cover rounded"
                                             width={100}
                                             height={100}
                                         />
@@ -200,7 +204,7 @@ const MoviesContent = () => {
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >
-                                                    <span> <LinkIcon size={18} /></span> Get Link
+                                                    <span> <LinkIcon size={18} /></span> Download Link
                                                 </Link>
                                             )}
                                         </div>
@@ -215,12 +219,14 @@ const MoviesContent = () => {
                             <button
                                 onClick={() => handlePageChange(currentPage - 1)}
                                 disabled={currentPage === 1}
-                                className={`px-4 py-2 border rounded ${currentPage === 1 ? 'bg-[#BABABABB] text-gray-700 cursor-not-allowed' : 'bg-[#a3a3a3]'
+                                // className={`px-4 py-2 border rounded ${currentPage === 1 ? 'bg-[#BABABABB] text-gray-700 cursor-not-allowed' : 'bg-[#a3a3a3]'
+                                //     }`}
+                                className={`px-4 py-2 border rounded ${currentPage === 1 ? 'cursor-pointer' : 'bg-white text-black'
                                     }`}
                             >
                                 Previous
                             </button>
-                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                            {/* {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                                 <button
                                     key={page}
                                     onClick={() => handlePageChange(page)}
@@ -229,11 +235,16 @@ const MoviesContent = () => {
                                 >
                                     {page}
                                 </button>
-                            ))}
+                            ))} */}
+                            <span className="px-3 py-2">
+                                Page {currentPage} of {totalPages}
+                            </span>
                             <button
                                 onClick={() => handlePageChange(currentPage + 1)}
                                 disabled={currentPage === totalPages}
-                                className={`px-4 py-2 border rounded ${currentPage === totalPages ? 'bg-[#BABABABB] text-gray-700 cursor-not-allowed' : 'bg-[#a3a3a3]'
+                                // className={`px-4 py-2 border rounded ${currentPage === totalPages ? 'bg-[#BABABABB] text-gray-700 cursor-not-allowed' : 'bg-[#a3a3a3]'
+                                //     }`}
+                                className={`px-4 py-2 border rounded ${currentPage === totalPages ? 'cursor-pointer' : 'bg-white text-black'
                                     }`}
                             >
                                 Next
