@@ -16,6 +16,7 @@ const NavigationContent = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [isOpen, setIsOpen] = useState(false);
+    // const [isTrendingOpen, setIsTrendingOpen] = useState(false);
 
     const handleCategoryClick = (category: string) => {
         const currentSearch = searchParams.get('search') || '';
@@ -51,7 +52,7 @@ const NavigationContent = () => {
                     />
                 </button>
                 {isOpen && (
-                    <div className="absolute top-full left-8 mt-2 w-48">
+                    <div className="absolute top-11 left-0 mt-2 w-full z-10 ps-8 bg-[#BABABA] rounded-lg">
                         <button
                             onClick={() => handleCategoryClick('Movie')}
                             className="w-full text-left px-4 py-2 text-black text-base font-normal hover:bg-[#BABABABB] rounded-lg"
@@ -81,6 +82,20 @@ const NavigationContent = () => {
                         </button>
                     </div>
                 )}
+            </div>
+            <div className="relative mt-2">
+                <button
+                    onClick={() => router.push('/admin/trending')}
+                    className="w-full flex justify-between items-center space-x-3 p-3 rounded-lg bg-[#BABABABB] hover:bg-[#a3a3a3] text-black"
+                >
+                    <div className="flex gap-3 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M23 6l-9.5 9.5-5-5L1 18" />
+                            <path d="M17 6h6v6" />
+                        </svg>
+                        <span className="text-base font-bold">Trending</span>
+                    </div>
+                </button>
             </div>
         </nav>
     );

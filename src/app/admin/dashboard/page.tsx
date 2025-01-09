@@ -155,121 +155,70 @@ const DashboardContent = () => {
   }
 
   return (
-      <div className="p-6">
-        <h1 className="text-black text-[22px] font-bold mb-6 bg-[#D9D9D9] max-w-max px-14 py-1.5 rounded-[18px]">Dashboard</h1>
-        <div className='flex items-center mb-8 gap-4'>
-          <div className='w-1/3'>
-            {/* <Search onSearch={handleSearch} initialQuery={currentSearchQuery} /> */}
-            <AdminSearch onSearch={handleSearch} initialQuery={currentSearchQuery} />
-          </div>
-          <div className='flex gap-1 items-center border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-3 rounded-[8px]'>
-            <Filter size={20} color='black' />
-            <select
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              className='text-black w-44 border-none outline-none'
-            >
-              <option value="">All Categories</option>
-              <option value="Movie">Movie</option>
-              <option value="Short">Short</option>
-              <option value="Other">Other video</option>
-            </select>
-          </div>
+    <div className="p-6">
+      <h1 className="text-black text-[22px] font-bold mb-6 bg-[#D9D9D9] max-w-max px-14 py-1.5 rounded-[18px]">Dashboard</h1>
+      <div className='flex items-center mb-8 gap-4'>
+        <div className='w-1/3'>
+          {/* <Search onSearch={handleSearch} initialQuery={currentSearchQuery} /> */}
+          <AdminSearch onSearch={handleSearch} initialQuery={currentSearchQuery} />
         </div>
+        <div className='flex gap-1 items-center border-2 border-black focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-3 rounded-[8px]'>
+          <Filter size={20} color='black' />
+          <select
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            className='text-black w-44 border-none outline-none'
+          >
+            <option value="">All Categories</option>
+            <option value="Movie">Movie</option>
+            <option value="Short">Short</option>
+            <option value="Other">Other video</option>
+          </select>
+        </div>
+      </div>
 
-        {results.length === 0 && !loading && (
-          <div className="text-center py-4 text-gray-500">
-            No results found
-          </div>
-        )}
+      {results.length === 0 && !loading && (
+        <div className="text-center py-4 text-gray-500">
+          No results found
+        </div>
+      )}
 
-        {results.length > 0 && (
-          <div className="overflow-x-auto">
-            {/* <table className="w-full border-collapse border">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="p-2 border">Title</th>
-                  <th className="p-2 border w-[300px]" >Description</th>
-                  <th className="p-2 border">Category</th>
-                  <th className="p-2 border">Image</th>
-                  <th className="p-2 border w-[300px]">Link</th>
-                  <th className="p-2 border">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentResults.map((result) => (
-                  <tr key={result.id}>
-                    <td className="p-2 border align-top">{result.title}</td>
-                    <td className="p-2 border w-[300px] align-top"><p className='text-ellipsis line-clamp-2'>{result.description}</p></td>
-                    <td className="p-2 border align-top">{result.category}</td>
-                    <td className="p-2 border align-top w-[150px]">
-                      {result.imageBase64 ? (
-                        <Image
-                          src={result.imageBase64}
-                          alt={result.title}
-                          className="w-16 h-20 object-cover rounded"
-                          width={100}
-                          height={100}
-                        />
-                      ) : (
-                        'No Image'
-                      )}
-                    </td>
-                    <td className="p-2 border w-[300px] align-top"><p className='!break-all'>{result.link}</p></td>
-                    <td className="p-2 border align-top">
-                      <div className="flex gap-2 align-top">
-                        <button
-                          onClick={() => handleEdit(result.id)}
-                          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(result.id)}
-                          className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table> */}
-            <table className="text-black w-full border-collapse ">
-              <thead className='w-full'>
-                <tr className="gap-2 flex mb-4">
-                  <th className="p-2.5 bg-[#D9D9D9] rounded-[18px] min-w-[150px]">Image</th>
-                  <th className="p-2.5 min-w-[150px] bg-[#D9D9D9] rounded-[18px]">Title Name</th>
-                  <th className="p-2.5 w-full bg-[#D9D9D9] rounded-[18px]">Description</th>
-                  <th className="p-2.5 min-w-[150px] bg-[#D9D9D9] rounded-[18px]">Category</th>
-                  <th className="p-2.5 w-full bg-[#D9D9D9] rounded-[18px]">Link</th>
-                  <th className="p-2.5 min-w-[100px] bg-[#D9D9D9] rounded-[18px]">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentResults.map((result) => (
-                  <tr key={result.id} className='flex items-center gap-2 rounded-[18px] mt-3 bg-[#E9E9E9]'>
-                    <td className="p-2.5 min-w-[150px] flex justify-center">
-                      {result.imageBase64 ? (
-                        <Image
-                          src={result.imageBase64}
-                          alt={result.title}
-                          className="w-20 h-28 object-cover rounded"
-                          width={100}
-                          height={100}
-                        />
-                      ) : (
-                        'No Image'
-                      )}
-                    </td>
-                    <td className="p-2.5 min-w-[150px] text-center font-medium">{result.title}</td>
-                    <td className="p-2.5 w-full text-center font-medium"><p className='text-ellipsis line-clamp-4 text-start'>{result.description}</p></td>
-                    <td className="p-2.5 min-w-[150px] text-center font-medium capitalize">{result.category}</td>
+      {results.length > 0 && (
+        <div className="overflow-x-auto">
+          <table className="text-black w-full border-collapse ">
+            <thead className='w-full'>
+              <tr className="gap-2 flex mb-4">
+                <th className="p-2.5 bg-[#D9D9D9] rounded-[18px] min-w-[150px]">Image</th>
+                <th className="p-2.5 min-w-[150px] bg-[#D9D9D9] rounded-[18px]">Title Name</th>
+                <th className="p-2.5 w-full bg-[#D9D9D9] rounded-[18px]">Description</th>
+                <th className="p-2.5 min-w-[150px] bg-[#D9D9D9] rounded-[18px]">Category</th>
+                <th className="p-2.5 w-full bg-[#D9D9D9] rounded-[18px]">Link</th>
+                <th className="p-2.5 min-w-[100px] bg-[#D9D9D9] rounded-[18px]">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentResults.map((result) => (
+                <tr key={result.id} className='flex items-center gap-2 rounded-[18px] mt-3 bg-[#E9E9E9]'>
+                  <td className="p-2.5 min-w-[150px] flex justify-center">
+                    {result.imageBase64 ? (
+                      <Image
+                        src={result.imageBase64}
+                        alt={result.title}
+                        className="w-20 h-28 object-cover rounded"
+                        width={100}
+                        height={100}
+                      />
+                    ) : (
+                      'No Image'
+                    )}
+                  </td>
+                  <td className="p-2.5 min-w-[150px] text-center font-medium">{result.title}</td>
+                  <td className="p-2.5 w-full text-center font-medium"><p className='text-ellipsis line-clamp-4 text-start'>{result.description}</p></td>
+                  <td className="p-2.5 min-w-[150px] text-center font-medium capitalize">{result.category}</td>
 
-                    <td className="p-2.5 w-full text-center font-medium"><p className='!break-all text-start'>{result.link}</p></td>
-                    <td className="p-2.5 min-w-[100px] text-center">
-                      {/* <div className="flex gap-2 align-top p-2.5 min-w-[100px]">
+                  <td className="p-2.5 w-full text-center font-medium"><p className='!break-all text-start'>{result.link}</p></td>
+                  <td className="p-2.5 min-w-[100px] text-center">
+                    {/* <div className="flex gap-2 align-top p-2.5 min-w-[100px]">
                         <button
                           onClick={() => handleEdit(result.id)}
                           className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
@@ -283,110 +232,71 @@ const DashboardContent = () => {
                           Delete
                         </button>
                       </div> */}
-                      <div className="relative">
-                        {/* Vertical Ellipsis Button */}
-                        <button
-                          onClick={() => toggleDropdown(result.id)}
-                          className="p-2 hover:bg-gray-100 rounded-full"
-                        >
-                          <MoreVertical className="w-5 h-5 text-gray-700" />
-                        </button>
+                    <div className="relative">
+                      {/* Vertical Ellipsis Button */}
+                      <button
+                        onClick={() => toggleDropdown(result.id)}
+                        className="p-2 hover:bg-gray-100 rounded-full"
+                      >
+                        <MoreVertical className="w-5 h-5 text-gray-700" />
+                      </button>
 
-                        {/* Dropdown Menu */}
-                        {dropdownStates[result.id] && (
-                          <div className="absolute z-50 right-[20px] top-[24px] mt-2 min-w-max bg-white shadow-md rounded-lg">
-                            <button
-                              onClick={() => {
-                                handleEdit(result.id);
-                                setDropdownStates((prev) => ({ ...prev, [result.id]: false })); // Close the dropdown
-                              }}
-                              className="flex items-center gap-2 px-4 py-2 w-full text-gray-700 hover:bg-gray-100 transition-colors"
-                            >
-                              <Edit className="w-4 h-4 text-gray-500" />
-                              Edit Movie
-                            </button>
-                            <button
-                              onClick={() => {
-                                handleDelete(result.id);
-                                setDropdownStates((prev) => ({ ...prev, [result.id]: false })); // Close the dropdown
-                              }}
-                              className="flex items-center gap-2 px-4 py-2 w-full text-red-600 hover:bg-gray-100 transition-colors"
-                            >
-                              <Trash className="w-4 h-4 text-red-500" />
-                              Delete Movie
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-              {/* <tbody>
-                {currentResults.map((result) => (
-                  <tr key={result.id}>
-                    <td className="p-2 border align-top">{result.title}</td>
-                    <td className="p-2 border w-[300px] align-top"><p className='text-ellipsis line-clamp-2'>{result.description}</p></td>
-                    <td className="p-2 border align-top">{result.category}</td>
-                    <td className="p-2 border align-top w-[150px]">
-                      {result.imageBase64 ? (
-                        <Image
-                          src={result.imageBase64}
-                          alt={result.title}
-                          className="w-16 h-20 object-cover rounded"
-                          width={100}
-                          height={100}
-                        />
-                      ) : (
-                        'No Image'
+                      {/* Dropdown Menu */}
+                      {dropdownStates[result.id] && (
+                        <div className="absolute z-50 right-[20px] top-[24px] mt-2 min-w-max bg-white shadow-md rounded-lg">
+                          <button
+                            onClick={() => {
+                              handleEdit(result.id);
+                              setDropdownStates((prev) => ({ ...prev, [result.id]: false })); // Close the dropdown
+                            }}
+                            className="flex items-center gap-2 px-4 py-2 w-full text-gray-700 hover:bg-gray-100 transition-colors"
+                          >
+                            <Edit className="w-4 h-4 text-gray-500" />
+                            Edit Movie
+                          </button>
+                          <button
+                            onClick={() => {
+                              handleDelete(result.id);
+                              setDropdownStates((prev) => ({ ...prev, [result.id]: false })); // Close the dropdown
+                            }}
+                            className="flex items-center gap-2 px-4 py-2 w-full text-red-600 hover:bg-gray-100 transition-colors"
+                          >
+                            <Trash className="w-4 h-4 text-red-500" />
+                            Delete Movie
+                          </button>
+                        </div>
                       )}
-                    </td>
-                    <td className="p-2 border w-[300px] align-top"><p className='!break-all'>{result.link}</p></td>
-                    <td className="p-2 border align-top">
-                      <div className="flex gap-2 align-top">
-                        <button
-                          onClick={() => handleEdit(result.id)}
-                          className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(result.id)}
-                          className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody> */}
-            </table>
-          </div>
-        )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
-        {totalPages > 1 && (
-          <div className="text-black  flex justify-between gap-2 mt-12 px-8">
-            <button
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="px-8 py-2  rounded-md disabled:opacity-50  transition-colors bg-[#BABABABB] hover:bg-[#a3a3a3] font-medium"
-            >
-              Previous
-            </button>
-            <span className="px-3 py-1">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className="px-8 py-2  rounded-md disabled:opacity-50  transition-colors bg-[#BABABABB] hover:bg-[#a3a3a3] font-medium"
-            >
-              Next
-            </button>
-          </div>
-        )}
-      </div>
+      {totalPages > 1 && (
+        <div className="text-black  flex justify-between gap-2 mt-12 px-8">
+          <button
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-8 py-2  rounded-md disabled:opacity-50  transition-colors bg-[#BABABABB] hover:bg-[#a3a3a3] font-medium"
+          >
+            Previous
+          </button>
+          <span className="px-3 py-1">
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="px-8 py-2  rounded-md disabled:opacity-50  transition-colors bg-[#BABABABB] hover:bg-[#a3a3a3] font-medium"
+          >
+            Next
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 
