@@ -187,7 +187,7 @@ useEffect(() => {
             onBlur={() => setTimeout(() => setInputFocused(false), 200)}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="text-black w-full px-4 py-3 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="text-black w-full px-4 md:py-3 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Search..."
           />
           <button
