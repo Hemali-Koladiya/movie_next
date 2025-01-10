@@ -158,7 +158,7 @@ export default function EditSearchResult({
   // };
 
   if (loading) {
-    return <AdminLayout><div className='flex justify-center'><div className='loader'></div></div></AdminLayout>;
+    return <AdminLayout><div className='flex justify-center items-center' style={{ height: "calc(100vh - 20vh)" }}><div className='loader'></div></div></AdminLayout>;
   }
 
   return (

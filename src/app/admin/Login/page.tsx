@@ -32,14 +32,14 @@ export default function AdminLogin() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
-          className="w-full px-4 py-2 mb-4 border rounded"
+          className="w-full px-4 py-2 mb-4 border rounded text-black"
         />
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
-          className="w-full px-4 py-2 mb-4 border rounded"
+          className="w-full px-4 py-2 mb-4 border rounded text-black"
         />
         <button
           type="submit"

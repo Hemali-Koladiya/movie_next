@@ -24,7 +24,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   if (loading) {
     // Optionally, return a loading spinner or message while checking authentication
-    return <div>Loading...</div>;
+    return <div className='flex justify-center items-center' style={{ height: "calc(100vh - 20vh)" }}><div className='loader'></div></div>;
   }
 
   return <>{children}</>;
