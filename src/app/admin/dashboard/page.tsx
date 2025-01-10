@@ -164,7 +164,7 @@ const DashboardContent = () => {
   );
 
   if (loading) {
-    return <div className='flex justify-center'><div className='loader'></div></div>;
+    return <div className='flex justify-center items-center' style={{ height: "calc(100vh - 20vh)" }}><div className='loader'></div></div>;
   }
 
   return (
