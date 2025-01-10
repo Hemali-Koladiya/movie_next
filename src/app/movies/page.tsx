@@ -249,7 +249,7 @@ const MoviesContent = () => {
                             >
                                 Next
                             </button>
-                        </div>
+                        </div> 
                     )}
                 </div>
             </div>
