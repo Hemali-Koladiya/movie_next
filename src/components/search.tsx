@@ -208,7 +208,7 @@ useEffect(() => {
         </div>
 
         {isInputFocused && (
-          <ul className="absolute w-full mt-2 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto z-[99] text-start">
+          <ul className="absolute w-full mt-2 bg-white  rounded-md shadow-lg max-h-60 overflow-auto z-[99] text-start">
             {queryString.trim() === '' // Show trending suggestions if input is empty
               ? trendingSuggestions.map((suggestion, index) => (
                   <li
