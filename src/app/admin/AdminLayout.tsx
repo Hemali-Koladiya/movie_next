@@ -106,6 +106,12 @@ interface AdminLayoutProps {
 }
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
+    const router = useRouter();
+    const handleLogout = () => {
+        localStorage.removeItem('UserId'); // Clear user email
+        router.push('/admin/Login'); // Redirect to login page
+    };
+
     return (
         <div className="flex h-screen bg-white">
             <div className="w-64 bg-[#DBDBDBDD] text-white rounded-r-3xl py-5 flex flex-col justify-between">
@@ -142,7 +148,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 <div className="text-white sticky top-0 w-full bg-white z-50">
                     <div className="flex justify-between items-center px-6 py-4 pt-8">
                         <h1 className="text-6xl font-semibold text-black">Media hub</h1>
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-3">
                             <Link
                                 href="/admin/add"
                                 className="flex text-base items-center space-x-2 bg-[#787878] text-white px-4 py-2 rounded-lg hover:bg-[#666666] font-bold"
@@ -150,6 +156,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                                 <Plus size={20} />
                                 <span>Add Media</span>
                             </Link>
+                            <button onClick={handleLogout} className="px-4 py-2 bg-red-500 text-white rounded">
+                                Logout
+                            </button>
                         </div>
                     </div>
                 </div>
