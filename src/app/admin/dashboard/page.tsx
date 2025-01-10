@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { SearchResult } from '@/types';
 import { Edit, Filter, MoreVertical, Trash } from 'lucide-react';
 import AdminSearch from '@/components/adminsearch';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 const DashboardContent = () => {
   const router = useRouter();
@@ -19,9 +20,21 @@ const DashboardContent = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentSearchQuery, setCurrentSearchQuery] = useState('');
   const [originalResults, setOriginalResults] = useState<SearchResult[]>([]);
+  const [dropdownStates, setDropdownStates] = useState<Record<string, boolean>>({});
+  // const [loadingAuth, setLoadingAuth] = useState(true); // New state for auth check
   const itemsPerPage = 10;
 
-  const [dropdownStates, setDropdownStates] = useState<Record<string, boolean>>({});
+
+  // Check authentication status on component mount
+  // useEffect(() => {
+  //   const isAuthenticated = localStorage.getItem('UserId');
+
+  //   if (!isAuthenticated) {
+  //     router.push('/admin/Login'); // Redirect to login if not authenticated
+  //   } else {
+  //     setLoadingAuth(false); // Authentication check is complete
+  //   }
+  // }, [router]);
 
   const toggleDropdown = (id: string) => {
     setDropdownStates((prev) => ({
@@ -151,7 +164,7 @@ const DashboardContent = () => {
   );
 
   if (loading) {
-    return <div className='text-black '>Loading...</div>;
+    return <div className='flex justify-center'><div className='loader'></div></div>;
   }
 
   return (
@@ -304,9 +317,12 @@ const DashboardContent = () => {
 export default function AdminDashboard() {
   return (
     <AdminLayout>
-      <Suspense fallback={<div>Loading dashboard...</div>}>
-        <DashboardContent />
+      <Suspense fallback={<div><div className='loader'></div></div>}>
+        <ProtectedRoute>
+          <DashboardContent />
+        </ProtectedRoute>
       </Suspense>
     </AdminLayout>
   );
 }
+

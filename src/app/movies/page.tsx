@@ -12,6 +12,7 @@ import Link from 'next/link';
 import logo from "../../../public/logo.png";
 import { LinkIcon } from 'lucide-react';
 import background from "../../../public/moviebackground.png";
+import Loader from '@/components/Loader';
 
 const MoviesContent = () => {
     const searchParams = useSearchParams();
@@ -142,7 +143,9 @@ const MoviesContent = () => {
     const currentMovies = movies.slice(startIndex, startIndex + itemsPerPage);
 
     if (loading) {
-        return <div className="text-center py-4">Loading...</div>;
+        return <div className='flex justify-center'>
+            <div className=""><Loader /></div>
+        </div>;
     }
 
     return (
@@ -249,7 +252,7 @@ const MoviesContent = () => {
                             >
                                 Next
                             </button>
-                        </div> 
+                        </div>
                     )}
                 </div>
             </div>
@@ -259,7 +262,7 @@ const MoviesContent = () => {
 
 export default function Movies() {
     return (
-        <Suspense fallback={<div className="text-center py-4">Loading...</div>}>
+        <Suspense fallback={<div className="loader"></div>}>
             <MoviesContent />
         </Suspense>
     );

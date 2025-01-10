@@ -22,3 +22,67 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   /* font-family: "Poppins", serif; */
 }
+
+
+/* HTML: <div class="loader"></div> */
+.mypopcorn {
+  /* padding:20px; */
+}
+
+.popcorn{
+  margin: auto;
+  position: absolute;
+  width:85px;
+  top: 10%; 
+  left: 0; 
+  bottom: 0; 
+  right: 0;
+}
+
+circle#popcrncirlce {
+  fill: #FFE477;
+  transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+  -webkit-animation: rotate 1.5s cubic-bezier(.49,.05,.32,1.04) infinite alternate;
+  animation: rotate 1.5s cubic-bezier(.49,.05,.32,1.04) infinite alternate;
+}
+
+
+
+@-webkit-keyframes rotate {
+  50% {
+    -webkit-transform: translate(0px, 100px);
+  }
+}
+
+@keyframes rotate {
+  50% {
+    transform: translate(0px, 100px);
+  }
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+   --c: linear-gradient(#000 0 0);
+   --m: radial-gradient(farthest-side,#000 92%,#0000);
+  background: 
+    var(--c),var(--m),
+    var(--c),var(--m), 
+    var(--c),var(--m);
+  background-size: 8px 15px,8px 8px;
+  background-repeat: no-repeat;
+  animation: l14 1s infinite alternate;
+}
+@keyframes l14 {
+  0%,
+  10% {background-position: 0 0   ,0 100%,50% 0   ,50% 100%,100% 0   ,100% 100%}
+  33% {background-position: 0 100%,0 0   ,50% 0   ,50% 100%,100% 0   ,100% 100%}
+  66% {background-position: 0 100%,0 0   ,50% 100%,50% 0   ,100% 0   ,100% 100%}
+  90%,
+  100%{background-position: 0 100%,0 0   ,50% 100%,50% 0   ,100% 100%,100% 0   }
+}
+
+

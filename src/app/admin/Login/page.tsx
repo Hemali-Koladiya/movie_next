@@ -12,9 +12,13 @@ export default function AdminLogin() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      router.push('/admin/dashboard');
-    } catch  {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Store authentication status in local storage
+      localStorage.setItem('UserId', user.uid || '');
+      router.push('/admin/dashboard'); // Redirect to dashboard after login
+    } catch {
       alert('Invalid credentials');
     }
   };
